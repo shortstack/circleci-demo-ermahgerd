@@ -1,0 +1,11 @@
+---
+- hosts: 167.99.148.100
+  become: yes
+  tasks:
+
+    - name: rsync files
+      synchronize:
+        src: ~/circleci-demo-ermahgerd/
+        dest: /var/www/html/
+        rsync_opts:
+          - "--exclude=.git --exclude=.circleci"
