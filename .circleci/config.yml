@@ -7,15 +7,14 @@ jobs:
     steps:
       - checkout
       - run:
-          name: install ansible
-          command: sudo pip install ansible
+          name: install awscli
+          command: sudo pip install awscli
       - run:
-          name: install rsync
-          command: sudo apt install -y rsync
+          name: remove .git and .circleci
+          command: rm -rf .git && rm -rf .gitignore && rm -rf .circleci
       - run:
-          name: deploy via ansible
-          command: ansible-playbook .circleci/deploy.yml
-
+          name: deploy to S3
+          command: aws s3 sync . s3://ermahgerd --region us-east-1 --acl public-read
 workflows:
   version: 2
   build-deploy:
