@@ -14,7 +14,6 @@ jobs:
           command: sudo apt install -y rsync
       - run:
           name: deploy via ansible
-          branch: master
           command: ansible-playbook .circleci/deploy.yml
 
 workflows:
